@@ -7,7 +7,8 @@ from typing import List
 
 import openai
 import pandas as pd
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
+from api_key import POE_API_KEY
 
 
 def extract_first_column(table_path: Path) -> List[str]:
@@ -36,11 +37,13 @@ def load_prompts(prompt_file: Path) -> List[str]:
 
 
 def build_client() -> openai.OpenAI:
-    load_dotenv()
-    api_key = os.getenv("POE_API_KEY")
-    if not api_key:
-        raise RuntimeError("POE_API_KEY is missing. Add it to your .env file.")
-    return openai.OpenAI(api_key=api_key, base_url="https://api.poe.com/v1")
+    # load_dotenv(".\.env", override=True)
+    # dotenv_path = find_dotenv()
+    # import pdb; pdb.set_trace()
+    # api_key = os.getenv("POE_API_KEY")
+    # if not api_key:
+    #     raise RuntimeError("POE_API_KEY is missing. Add it to your .env file.")
+    return openai.OpenAI(api_key=POE_API_KEY, base_url="https://api.poe.com/v1")
 
 
 def run_prompt(client: openai.OpenAI, model: str, prompt: str, item: str) -> str:

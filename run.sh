@@ -1,0 +1,1 @@
+python poe_prompt_runner.py --table test_cases.xlsx --prompts image_prompt.txt --output outputs --model claude-haiku-4.5
